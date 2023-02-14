@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a48d9d2-8aa8-418d-a190-2c1841b420a7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/China_surname_distribution.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/China_surname_distribution.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/China_surnames.py" beforeDir="false" afterPath="$PROJECT_DIR$/China_surnames.py" afterDir="false" />
     </list>
@@ -40,9 +39,6 @@
       <module name="China_surname_distribution" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -95,7 +91,7 @@
       <option name="presentableId" value="Default" />
       <updated>1671067753950</updated>
       <workItem from="1676059273671" duration="5467000" />
-      <workItem from="1676150542240" duration="6209000" />
+      <workItem from="1676150542240" duration="11323000" />
     </task>
     <servers />
   </component>
@@ -103,6 +99,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/China_surnames_py$China_surnames.coverage" NAME="China_surnames Coverage Results" MODIFIED="1676061765012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/China_surnames_py$China_surnames.coverage" NAME="China_surnames Coverage Results" MODIFIED="1676360365665" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -3,7 +3,8 @@
 
 import pandas as pd
 import numpy as np
-import pandas.plotting._matplotlib as plt
+#import pandas.plotting._matplotlib as plt
+import matplotlib.pyplot as plt
 import networkx as nx
 
 
@@ -229,35 +230,35 @@ G0.graph["Name"] = "PRC provinces surnames"
 #WIP- idea is to have the nodes numbered from 0 to 27 (indices of the adj matrix), while the province abbreviation will be displayed in the node
 G0.add_nodes_from([
     ("0", {"EN": "MAN", "Zh-S": "东北"}),
-    ("SD", {"Zh-S": "山东"}),
-    ("BJ", {}),
-    ("HEB", {}),
-    ("SW", {"Zh-S": "山西"}),
-    ("MON", {}),
-    ("TJ", {}),
-    ("HEN", {}),
-    ("SX", {"Zh-S": "陕西"}),
-    ("GS", {}),
-    ("NX", {}),
-    ("XJ", {}),
-    ("AH", {}),
-    ("JS", {}),
-    ("QH", {}),
-    ("HUB", {}),
-    ("CQ", {}),
-    ("SC", {}),
-    ("GZ", {}),
-    ("HUN", {}),
-    ("YUN", {}),
-    ("JX", {}),
-    ("SH", {}),
-    ("ZJ", {}),
-    ("FJ", {}),
-    ("GD", {"Zh-S": "广东"}),
-    ("HAN", {"Zh-S": "海南"}),
-    ("27",{"EN": "GX", "Zh-S": "广西"}),
-
-    '''
+    ("1", {"EN": "SD", "Zh-S": "山东"}),
+    ("2", {"EN": "BJ", "Zh-S": ""}),
+    ("3", {"EN": "HEB", "Zh-S": "河北"}),
+    ("4", {"EN": "SW", "Zh-S": "山西"}),
+    ("5", {"EN": "MON", "Zh-S": "内蒙"}),
+    ("6", {"EN": "TJ", "Zh-S": "天津"}),
+    ("7", {"EN": "HEN", "Zh-S": "河南"}),
+    ("8", {"EN": "SX", "Zh-S": "陕西"}),
+    ("9", {"EN": "GS", "Zh-S": "甘肃"}),
+    ("10", {"EN": "NX", "Zh-S": "宁夏"}),
+    ("11", {"EN": "XJ", "Zh-S": "新疆"}),
+    ("12", {"EN": "AH", "Zh-S": "安徽"}),
+    ("13", {"EN": "JS", "Zh-S": "江苏"}),
+    ("14", {"EN": "QH", "Zh-S": "青海"}),
+    ("15", {"EN": "HUB", "Zh-S": "湖北"}),
+    ("16", {"EN": "CQ", "Zh-S": "重庆"}),
+    ("17", {"EN": "SC", "Zh-S": "四川"}),
+    ("18", {"EN": "GZ", "Zh-S": "贵州"}),
+    ("19", {"EN": "HUN", "Zh-S": "湖南"}),
+    ("20", {"EN": "YUN", "Zh-S": "云南"}),
+    ("21", {"EN": "JX", "Zh-S": "江西"}),
+    ("22", {"EN": "SH", "Zh-S": "上海"}),
+    ("23", {"EN": "ZJ", "Zh-S": "浙江"}),
+    ("24", {"EN": "FJ", "Zh-S": "福建"}),
+    ("25", {"EN": "GD", "Zh-S": "广东"}),
+    ("26", {"EN": "HAN", "Zh-S": "海南"}),
+    ("27", {"EN": "GX", "Zh-S": "广西"})
+])
+'''
     ("MAN", {"Engl": "Manchuria", "pinyin": "Dōngběi", "Zh-S": "东北", "Zh-T": "東北"}),
     ("SD", {"Engl": "Shandong", "pinyin": "Shāndōng", "Zh-S": "山东", "Zh-T": "山東"}),
     ("BJ", {}),
@@ -287,6 +288,32 @@ G0.add_nodes_from([
     ("HAN", {"Engl": "Hainan", "pinyin": "Hǎinán", "Zh-S": "海南", "Zh-T": "海南"}),
     ("GX", {"Engl": "Guangxi", "pinyin": "Guǎngxī", "Zh-S": "广西", "Zh-T": "廣西"}),
 '''
-])
 
-# add edges according to coordinates here
+G1 = G0
+
+# add edges according to coordinates of adj_matrix
+# https://stackoverflow.com/questions/4288973/whats-the-difference-between-s-and-d-in-python-string-formatting
+for i in range(CONST_NUM_PROV):
+    for j in range(CONST_NUM_PROV):
+        if (prc_prov_adj_matrix_[i, j] == 1):
+            G0.add_edge("%d" % i, "%d" % j, weight = prc_prov_similarity_matrix[i, j])
+        if (prc_prov_similarity_matrix[i, j] >= 10):
+            G1.add_edge("%d" % i, "%d" % j, weight = prc_prov_similarity_matrix[i, j])
+
+# https://stackoverflow.com/questions/3567018/how-can-i-specify-an-exact-output-size-for-my-networkx-graph
+# https://networkx.org/documentation/stable/reference/drawing.html
+# https://stackoverflow.com/questions/20381460/networkx-how-to-show-node-and-edge-attributes-in-a-graph-drawing
+
+
+'''
+pos = nx.get_node_attributes(G0, 'pos')
+{
+    "0": (10, 10),
+    "1": (10, 9)
+    "11": (1, 9),
+    "26": (4, 1)
+}'''
+
+plt.figure(1,figsize=(12,12))
+nx.draw(G0, node_color="red", node_size=1000, with_labels=True, font_color="white", font_size=20)
+plt.show()
