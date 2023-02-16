@@ -87,42 +87,6 @@ Idea- eventually edit each element in the map to be a data structure that contai
 '''
 
 
-'''
-provinces_map = np.chararray((8,6))
-provinces_map[:] = '.'
-provinces_map[1,4] = 'O' # Manchuria (MAN)
-provinces_map[3,4] = 'O' # Shandong (SD)
-provinces_map[1,3] = 'O' # Beijing (BJ)
-provinces_map[2,3] = 'O' # Hebei (HEB)
-provinces_map[2,2] = 'O' # Shanxi (SX)
-provinces_map[0,3] = 'O' # InnerMongolia (MON)
-provinces_map[2,4] = 'O' # Tianjin (TJ)
-provinces_map[3,3] = 'O' # Henan (HEN)
-provinces_map[3,2] = 'O' # Shaanxi (SW)
-provinces_map[3,1] = 'O' # Gansu (GS)
-provinces_map[2,1] = 'O' # Ningxia (NX)
-provinces_map[0,2] = 'O' # Xinjiang (XJ)
-provinces_map[5,4] = 'O' # Anhui (AH)
-provinces_map[4,4] = 'O' # Jiangsu (JS)
-provinces_map[3,0] = 'O' # Qinghai (QH)
-provinces_map[4,3] = 'O' # Hubei (HUB)
-provinces_map[4,2] = 'O' # Chongqing (CQ)
-provinces_map[4,1] = 'O' # Sichuan (SC)
-provinces_map[5,1] = 'O' # Guizhou (GZ)
-provinces_map[5,2] = 'O' # Hunan (HUN) 
-provinces_map[6,1] = 'O' # Yunnan (YUN)
-provinces_map[5,3] = 'O' # Jiangxi (JX)
-provinces_map[4,5] = 'O' # Shanghai (SH)
-provinces_map[5,5] = 'O' # Zhejiang (ZJ)
-provinces_map[6,5] = 'O' # Fujian (FJ)
-provinces_map[6,4] = 'O' # Guangdong (GD)
-provinces_map[7,4] = 'O' # Hainan (HAN)
-provinces_map[6,3] = 'O' # Guangxi (GX)
-
-print(provinces_map)
-print()
-'''
-
 # source: https://i.imgur.com/m8M4Dwj.jpg
 prc_prov_adj_matrix = [[0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], # Manchuria
                     [0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0], # Shandong
@@ -306,14 +270,75 @@ for i in range(CONST_NUM_PROV):
 
 
 '''
-pos = nx.get_node_attributes(G0, 'pos')
-{
-    "0": (10, 10),
-    "1": (10, 9)
-    "11": (1, 9),
-    "26": (4, 1)
-}'''
+LatLong to Coordinates Conversion...
+Y-axis: 15 to 45 N
+X-axis: 80 to 130 E
+'''
+'''
+pos = {
+    "0": (9.0, 9.3),
+    "1": (7.7, 7.1),
+    "2": (7.3, 8.3),
+    "3": (7.3, 8.1),
+    "4": (6.5, 7.6),
+    "5": (6.6, 9.7),
+    "6": (7.4, 8.0),
+    "7": (6.7, 6.3),
+    "8": (5.7, 6.9),
+    "9": (4.4, 7.7),
+    "10": (5.3, 7.8),
+    "11": (1.0, 8.7),
+    "12": (7.4, 5.6),
+    "13": (8.0, 6.0),
+    "14": (3.2, 6.7),
+    "15": (6.5, 5.4),
+    "16": (5.3, 4.9),
+    "17": (4.8, 5.2),
+    "18": (5.4, 3.9),
+    "19": (6.6, 4.4),
+    "20": (4.1, 3.4),
+    "21": (7.2, 4.1),
+    "22": (8.3, 5.4),
+    "23": (8.1, 4.7),
+    "24": (7.7, 3.6),
+    "25": (6.7, 2.8),
+    "26": (5.9, 1.4),
+    "27": (5.7, 2.9)
+}
+'''
+
+# tweaked positions of MON, BJ, TJ, SX
+pos = {
+    "0": (9.0, 9.3),
+    "1": (7.7, 7.1),
+    "2": (7.8, 8.3),
+    "3": (7.3, 8.1),
+    "4": (6.5, 7.6),
+    "5": (6.6, 8.7),
+    "6": (7.9, 8.0),
+    "7": (6.7, 6.3),
+    "8": (5.7, 6.4),
+    "9": (4.4, 7.7),
+    "10": (5.3, 7.8),
+    "11": (1.0, 8.7),
+    "12": (7.4, 5.6),
+    "13": (8.0, 6.0),
+    "14": (3.2, 6.7),
+    "15": (6.5, 5.4),
+    "16": (5.3, 4.9),
+    "17": (4.8, 5.2),
+    "18": (5.4, 3.9),
+    "19": (6.6, 4.4),
+    "20": (4.1, 3.4),
+    "21": (7.2, 4.6),
+    "22": (8.3, 5.4),
+    "23": (8.1, 4.7),
+    "24": (7.7, 3.6),
+    "25": (6.7, 2.8),
+    "26": (5.9, 1.8),
+    "27": (5.7, 2.9)
+}
 
 plt.figure(1,figsize=(12,12))
-nx.draw(G0, node_color="red", node_size=1000, with_labels=True, font_color="white", font_size=20)
+nx.draw(G0, pos, node_color="red", node_size=1000, with_labels=True, font_color="white", font_size=20)
 plt.show()
