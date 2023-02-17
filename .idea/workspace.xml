@@ -28,7 +28,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/provinces_similarity_threshold_10.png" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -93,7 +93,7 @@
       <workItem from="1676059273671" duration="5467000" />
       <workItem from="1676150542240" duration="11323000" />
       <workItem from="1676441272492" duration="2019000" />
-      <workItem from="1676535129690" duration="1459000" />
+      <workItem from="1676535129690" duration="12107000" />
     </task>
     <servers />
   </component>

@@ -95,19 +95,19 @@ prc_prov_adj_matrix = [[0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
                     [0,0,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], # Shanxi
                     [0,0,0,1,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], # InnerMongolia
                     [0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], # Tianjin
-                    [0,1,0,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0], # Henan
-                    [0,0,0,0,1,1,0,1,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0], # Shaanxi
-                    [0,0,0,0,0,1,0,0,1,0,1,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0], # Gansu
+                    [0,1,0,1,1,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0], # Henan
+                    [0,0,0,0,1,1,0,1,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0], # Shaanxi
+                    [0,0,0,0,0,1,0,0,1,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0], # Gansu
                     [0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], # Ningxia
                     [0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0], # Xinjiang
-                    [0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,1,0,0,0,0], # Anhui
+                    [0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0], # Anhui
                     [0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0], # Jiangsu
-                    [0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0], # Qinghai
-                    [0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0], # Hubei
+                    [0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0], # Qinghai
+                    [0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0], # Hubei
                     [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0], # Chongqing
                     [0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0], # Sichuan
-                    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,1], # Guizhou
-                    [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,1], # Hunan
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,0,0,0,0,0,0,1], # Guizhou
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,1], # Hunan
                     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1], # Yunnan
                     [0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,1,1,1,0,0], # Jiangxi
                     [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0], # Shanghai
@@ -139,8 +139,9 @@ for i in range(CONST_NUM_PROV):
             prc_prov_similarity_matrix[i, j] = val1 + val2 + val3 + val4
             prc_prov_similarity_matrix[j, i] = prc_prov_similarity_matrix[i, j]
 
-#print(prc_prov_similarity_matrix)
+print(prc_prov_similarity_matrix)
 
+'''
 prc_prov_sim_matrix_reload = prc_prov_similarity_matrix
 for a in range(CONST_NUM_PROV):
     for b in range(CONST_NUM_PROV):
@@ -148,6 +149,7 @@ for a in range(CONST_NUM_PROV):
             prc_prov_sim_matrix_reload[a, b] = 0
 
 print(prc_prov_sim_matrix_reload)
+'''
 
 '''                
 # https://www.youtube.com/watch?v=HDUzBEG1GlA
@@ -253,16 +255,17 @@ G0.add_nodes_from([
     ("GX", {"Engl": "Guangxi", "pinyin": "Guǎngxī", "Zh-S": "广西", "Zh-T": "廣西"}),
 '''
 
-G1 = G0
+# make copy of existing graph's nodes
+G1 = G0.copy()
 
 # add edges according to coordinates of adj_matrix
 # https://stackoverflow.com/questions/4288973/whats-the-difference-between-s-and-d-in-python-string-formatting
 for i in range(CONST_NUM_PROV):
-    for j in range(CONST_NUM_PROV):
+    for j in range(i, CONST_NUM_PROV):
         if (prc_prov_adj_matrix_[i, j] == 1):
-            G0.add_edge("%d" % i, "%d" % j, weight = prc_prov_similarity_matrix[i, j])
+            G0.add_edge("%d" % i, "%d" % j, weight=prc_prov_similarity_matrix[i, j])
         if (prc_prov_similarity_matrix[i, j] >= 10):
-            G1.add_edge("%d" % i, "%d" % j, weight = prc_prov_similarity_matrix[i, j])
+            G1.add_edge("%d" % i, "%d" % j, weight=prc_prov_similarity_matrix[i, j])
 
 # https://stackoverflow.com/questions/3567018/how-can-i-specify-an-exact-output-size-for-my-networkx-graph
 # https://networkx.org/documentation/stable/reference/drawing.html
@@ -307,15 +310,15 @@ pos = {
 }
 '''
 
-# tweaked positions of MON, BJ, TJ, SX
+# tweaked positions
 pos = {
     "0": (9.0, 9.3),
     "1": (7.7, 7.1),
-    "2": (7.8, 8.3),
-    "3": (7.3, 8.1),
+    "2": (8.4, 8.0),
+    "3": (7.3, 7.9),
     "4": (6.5, 7.6),
     "5": (6.6, 8.7),
-    "6": (7.9, 8.0),
+    "6": (8.6, 7.4),
     "7": (6.7, 6.3),
     "8": (5.7, 6.4),
     "9": (4.4, 7.7),
@@ -326,9 +329,9 @@ pos = {
     "14": (3.2, 6.7),
     "15": (6.5, 5.4),
     "16": (5.3, 4.9),
-    "17": (4.8, 5.2),
-    "18": (5.4, 3.9),
-    "19": (6.6, 4.4),
+    "17": (4.6, 5.2),
+    "18": (5.3, 4.0),
+    "19": (6.4, 4.4),
     "20": (4.1, 3.4),
     "21": (7.2, 4.6),
     "22": (8.3, 5.4),
@@ -339,6 +342,16 @@ pos = {
     "27": (5.7, 2.9)
 }
 
-plt.figure(1,figsize=(12,12))
+f = plt.figure(1, figsize=(12,12))
 nx.draw(G0, pos, node_color="red", node_size=1000, with_labels=True, font_color="white", font_size=20)
-plt.show()
+labels = {e: G0.edges[e]['weight'] for e in G0.edges}
+nx.draw_networkx_edge_labels(G0, pos, edge_labels=labels, font_size=14)
+f.show()
+
+g = plt.figure(2, figsize=(12,12))
+nx.draw(G1, pos, node_color="blue", node_size=1000, with_labels=True, font_color="white", font_size=20)
+g.show()
+
+# https://stackoverflow.com/questions/52251556/remove-all-edges-from-a-graph-in-networkx
+G0.remove_edges_from(G0.edges())
+G1.remove_edges_from(G1.edges())
