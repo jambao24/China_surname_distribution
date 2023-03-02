@@ -27,9 +27,9 @@ For each "province", calculate similarity of surname frequency distribution with
 
 Similarity metric- 
 1) 1 point for each surname (number) found in both the "test" province and the "reference" province (max possible: 10)
-2) 1 point for each surname (number) found in the same position in both provinces for indices 4 to 10 (max possible: 6)
-3) 2 points for each surname (number) found in the same position in both provinces for indices 2 to 3 (max posssible: 4)
-4) 5 points for matching most common surnames (max possible: 5)
+2) 1 point for each surname (number) found in the same position in both provinces for indices 4 to 10 (max possible: 7)
+3) 1 point for each surname (number) found in the same position in both provinces for indices 2 to 3 (max posssible: 2)
+4) 2 points for matching most common surnames (max possible: 2)
 '''
 
 # Python function for similarity metric 1
@@ -57,7 +57,7 @@ def identical_2and3(a, b):
   tally = 0
   for i in range(1, 2):
     if a[i] == b[i]:
-      tally += 2
+      tally += 1
   return tally
 
 
@@ -67,7 +67,7 @@ def identical_1(a, b):
   if (len(a) != len(b) or len(a) != 10):
     return -1
   if a[0] == b[0]:
-      return 5
+      return 2
   return 0
 
 '''
@@ -139,7 +139,7 @@ for i in range(CONST_NUM_PROV):
             prc_prov_similarity_matrix[i, j] = val1 + val2 + val3 + val4
             prc_prov_similarity_matrix[j, i] = prc_prov_similarity_matrix[i, j]
 
-print(prc_prov_similarity_matrix)
+#print(prc_prov_similarity_matrix)
 
 '''
 prc_prov_sim_matrix_reload = prc_prov_similarity_matrix
@@ -151,21 +151,6 @@ for a in range(CONST_NUM_PROV):
 print(prc_prov_sim_matrix_reload)
 '''
 
-'''                
-# https://www.youtube.com/watch?v=HDUzBEG1GlA
-# https://github.com/joeyajames/Python/blob/master/graph_adjacency-matrix.py
-
-# implementation of an undirected graph using adjacency matrix
-class Vertex:
-  def __init__(self, n):
-    self.name = n
-    #self.name_CN = 'temp'
-
-class Graph:
-  vertices = {}
-  edges = {}
-  edge_indices = {}
-'''
 
 # https://www.linkedin.com/pulse/beginners-guide-choropleth-map-python-visualize-chinas-ying-li/
 # for visualization of China on an actual map?
@@ -224,48 +209,53 @@ G0.add_nodes_from([
     ("26", {"EN": "HAN", "Zh-S": "海南"}),
     ("27", {"EN": "GX", "Zh-S": "广西"})
 ])
-'''
-    ("MAN", {"Engl": "Manchuria", "pinyin": "Dōngběi", "Zh-S": "东北", "Zh-T": "東北"}),
-    ("SD", {"Engl": "Shandong", "pinyin": "Shāndōng", "Zh-S": "山东", "Zh-T": "山東"}),
-    ("BJ", {}),
-    ("HEB", {}),
-    ("SW", {"Engl": "Shanxi", "pinyin": "Shānxī", "Zh-S": "山西", "Zh-T": "山西"}),
-    ("MON", {}),
-    ("TJ", {}),
-    ("HEN", {}),
-    ("SX", {"Engl": "Shaanxi", "pinyin": "Shǎnxī", "Zh-S": "陕西", "Zh-T": "陕西"}),
-    ("GS", {}),
-    ("NX", {}),
-    ("XJ", {}),
-    ("AH", {}),
-    ("JS", {}),
-    ("QH", {}),
-    ("HUB", {}),
-    ("CQ", {}),
-    ("SC", {}),
-    ("GZ", {}),
-    ("HUN", {}),
-    ("YUN", {}),
-    ("JX", {}),
-    ("SH", {}),
-    ("ZJ", {}),
-    ("FJ", {}),
-    ("GD", {"Engl": "Guangdong", "pinyin": "Guǎngdōng", "Zh-S": "广东", "Zh-T": "廣東"}),
-    ("HAN", {"Engl": "Hainan", "pinyin": "Hǎinán", "Zh-S": "海南", "Zh-T": "海南"}),
-    ("GX", {"Engl": "Guangxi", "pinyin": "Guǎngxī", "Zh-S": "广西", "Zh-T": "廣西"}),
-'''
 
 # make copy of existing graph's nodes
 G1 = G0.copy()
+# make copy of copied graph's nodes
+G2 = G1.copy()
+
+# create copy of the similarity matrix with all values under 10 truncated
+# goal is to visualize regional clusters by limiting the number of edges with weight >= 10 per node
+sim_matrix_trunc = np.matrix.copy(prc_prov_similarity_matrix)
+
+# https://stackoverflow.com/questions/33181350/quickest-way-to-find-the-nth-largest-value-in-a-numpy-matrix/43171216#43171216
+# for each row in the resultant matrix, zero out all values below the 3rd largest value
+
+# loop through the first 13 nodes to handle the northern provinces + Anhui
+temp0 = np.copy(sim_matrix_trunc[0:13])
+#print(temp0)
+for i in range(13):
+    tmp1 = temp0[i]
+    val = np.partition(tmp1.flatten(), -3)[-3]
+    tmp1[tmp1 < val] = 0
+    for j in range(CONST_NUM_PROV):
+        sim_matrix_trunc[i, j] = tmp1[j]
+        #sim_matrix_trunc[j, i] = sim_matrix_trunc[i, j]
+
+# also repeat this step for node 14 (Qinghai)
+QH_edges = np.copy(sim_matrix_trunc[14])
+val2 = np.partition(QH_edges.flatten(), -3)[-3]
+QH_edges[QH_edges < val2] = 0
+for k in range(CONST_NUM_PROV):
+    sim_matrix_trunc[14, k] = QH_edges[k]
+    sim_matrix_trunc[k, 14] = sim_matrix_trunc[14, k]
+sim_matrix_trunc[14, 14] = 0
+
 
 # add edges according to coordinates of adj_matrix
 # https://stackoverflow.com/questions/4288973/whats-the-difference-between-s-and-d-in-python-string-formatting
 for i in range(CONST_NUM_PROV):
     for j in range(i, CONST_NUM_PROV):
+        # G0- visualize edges for neighboring provinces
         if (prc_prov_adj_matrix_[i, j] == 1):
             G0.add_edge("%d" % i, "%d" % j, weight=prc_prov_similarity_matrix[i, j])
+        # G1- visualize all edges > 10
         if (prc_prov_similarity_matrix[i, j] >= 10):
             G1.add_edge("%d" % i, "%d" % j, weight=prc_prov_similarity_matrix[i, j])
+        # G2- visualize highest value edges > 10
+        if (sim_matrix_trunc[i, j] >= 10):
+            G2.add_edge("%d" % i, "%d" % j, weight=prc_prov_similarity_matrix[i, j])
 
 # https://stackoverflow.com/questions/3567018/how-can-i-specify-an-exact-output-size-for-my-networkx-graph
 # https://networkx.org/documentation/stable/reference/drawing.html
@@ -310,7 +300,7 @@ pos = {
 }
 '''
 
-# tweaked positions
+# tweaked positions, based on real-life latitude and longitude
 pos = {
     "0": (9.0, 9.3),
     "1": (7.7, 7.1),
@@ -352,6 +342,12 @@ g = plt.figure(2, figsize=(12,12))
 nx.draw(G1, pos, node_color="blue", node_size=1000, with_labels=True, font_color="white", font_size=20)
 g.show()
 
+h = plt.figure(2, figsize=(12,12))
+nx.draw(G2, pos, node_color="green", node_size=1000, with_labels=True, font_color="white", font_size=20)
+h.show()
+
+
 # https://stackoverflow.com/questions/52251556/remove-all-edges-from-a-graph-in-networkx
 G0.remove_edges_from(G0.edges())
 G1.remove_edges_from(G1.edges())
+G2.remove_edges_from(G2.edges())
