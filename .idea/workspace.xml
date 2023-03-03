@@ -7,8 +7,6 @@
     <list default="true" id="4a48d9d2-8aa8-418d-a190-2c1841b420a7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/China_surnames.py" beforeDir="false" afterPath="$PROJECT_DIR$/China_surnames.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adjusted_adjacency_matrix.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/edited_pos_adjmatrix-toedit.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +96,7 @@
       <workItem from="1676535129690" duration="12419000" />
       <workItem from="1676947523417" duration="771000" />
       <workItem from="1677731189235" duration="125000" />
-      <workItem from="1677739134300" duration="6867000" />
+      <workItem from="1677739134300" duration="9958000" />
     </task>
     <servers />
   </component>
@@ -110,7 +108,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/China_surnames.py</url>
-          <line>341</line>
+          <line>342</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

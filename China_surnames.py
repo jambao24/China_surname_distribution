@@ -28,8 +28,8 @@ For each "province", calculate similarity of surname frequency distribution with
 Similarity metric- 
 1) 1 point for each surname (number) found in both the "test" province and the "reference" province (max possible: 10)
 2) 1 point for each surname (number) found in the same position in both provinces for indices 4 to 10 (max possible: 7)
-3) 1 point for each surname (number) found in the same position in both provinces for indices 2 to 3 (max posssible: 2)
-4) 2 points for matching most common surnames (max possible: 2)
+3) 2 point for each surname (number) found in the same position in both provinces for indices 2 to 3 (max posssible: 4)
+4) 4 points for matching most common surnames (max possible: 4)
 '''
 
 # Python function for similarity metric 1
@@ -57,7 +57,7 @@ def identical_2and3(a, b):
   tally = 0
   for i in range(1, 2):
     if a[i] == b[i]:
-      tally += 1
+      tally += 2
   return tally
 
 
@@ -67,7 +67,7 @@ def identical_1(a, b):
   if (len(a) != len(b) or len(a) != 10):
     return -1
   if a[0] == b[0]:
-      return 2
+      return 5
   return 0
 
 '''
@@ -222,13 +222,14 @@ sim_matrix_trunc = np.matrix.copy(prc_prov_similarity_matrix)
 # https://stackoverflow.com/questions/33181350/quickest-way-to-find-the-nth-largest-value-in-a-numpy-matrix/43171216#43171216
 # for each row in the resultant matrix, zero out all values below the 3rd largest value
 
-# loop through the first 13 nodes to handle the northern provinces + Anhui
+# loop through the first 14 nodes to handle the northern provinces + Anhui
 temp0 = np.copy(sim_matrix_trunc[0:13])
 #print(temp0)
-for i in range(13):
+for i in range(13-1, 0, -1):
     tmp1 = temp0[i]
-    val = np.partition(tmp1.flatten(), -3)[-3]
-    tmp1[tmp1 < val] = 0
+    val = np.partition(tmp1.flatten(), -4)[-4]
+    tmp1[(val > tmp1) & (tmp1 >= 10)] = 10
+    tmp1[tmp1 < 10] = 0
     for j in range(CONST_NUM_PROV):
         sim_matrix_trunc[i, j] = tmp1[j]
         #sim_matrix_trunc[j, i] = sim_matrix_trunc[i, j]
